@@ -30,19 +30,20 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
         if start == NULL
         {
             allocate a heap space and store its address into start
+            copy from start to temp_next
         }
         else
         {
             allocate a heap space and store its address into temp_next
         }
         
-        copy from ith row jth column to name
-        copy from ith row (j+1)th column to city
-        copy from ith row (j+2)th column to state
-        copy from ith row (j+3)th column to item
-        copy from ith row (j+4)th column to price
-        copy from temp_prev to link_back
-        copy from start to temp_prev
+        copy from ith row jth column to temp_next->name
+        copy from ith row (j+1)th column to temp_next->city
+        copy from ith row (j+2)th column to temp_next->state
+        copy from ith row (j+3)th column to temp_next->item
+        copy from ith row (j+4)th column to temp_next->price
+        copy from temp_prev to temp_next->link_back
+        copy from temp_next to temp_prev
         i++
     }
     
