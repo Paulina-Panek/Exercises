@@ -1,6 +1,6 @@
 Paulina Panek  4/14/2019
 
-Assumption: flat table doesn't have header row, columns are follow the same order as the person struct below
+Assumption: flat table doesn't have header row, columns follow the same order as in the struct
 
 define struct person
 {
@@ -14,11 +14,16 @@ define struct person
 
 define a pointer to person called start
 define a pointer to person called temp_prev
+define a pointer to person called temp_next
+define a character array called state_cat
+define a character array called city_cat
+
 
 copy from NULL to start
 copy from NULL to temp_prev
+copy from NULL to temp_next
 
-void function makePivot (flat_table[][], row_fields, column_fields, data_fields)
+void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2])
 {
     i = 0, j = 0
     
@@ -35,4 +40,15 @@ void function makePivot (flat_table[][], row_fields, column_fields, data_fields)
         i++
     }
     
+    Assumption: rowfield[0] = state
+                rowfield[1] = city
+                columnfield = data
+                datafield[0] = sumCity
+                datafield[1] = sumPrice
+                
+   copy from start->state to state_cat
+   copy from start->city to city_cat
+   copy from start->link_back to temp_next
+   
+   
     
