@@ -80,4 +80,22 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
            temp_prev = temp_prev->link_back
        }
            
-    
+           
+ functions:
+ int sameStateCity(char [] state, char [] city, struct person * person_ptr)
+ {
+     int rtrn;
+     
+     rtrn = 0
+     
+     if (state == person_pointer->state)     // use string library to compare //
+     {
+       if city == person_pointer->city
+       {
+           rtrn = 1
+       }
+     }
+     
+     return(rtrn)
+ }
+ 
