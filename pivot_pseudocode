@@ -61,7 +61,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
    
    rows = 0
    
-   while temp_prev->link_back != NULL
+   while temp_next->link_back != NULL
    {
        state1 = temp_prev->state
        city1 = temp_prev->city
