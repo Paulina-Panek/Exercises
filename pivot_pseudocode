@@ -17,7 +17,7 @@ define a pointer to person called temp_prev
 define a pointer to person called temp_next
 define a character array called state_cat
 define a character array called city_cat
-
+define integers i, j, city1_sum, city2_sum
 
 copy from NULL to start
 copy from NULL to temp_prev
@@ -50,5 +50,19 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
    copy from start->city to city_cat
    copy from start->link_back to temp_next
    
-   
+   while temp_prev->link_back != NULL
+   {
+       if temp_next->state == temp_prev->state
+       {
+           if temp_next->city == temp_prev->city
+           {
+               city1_sum = city1_sum + (temp_next->price)
+           }
+           else
+           {
+               temp_prev = temp_next
+               temp_next = temp_prev->link_back
+           }    
+           
+           
     
