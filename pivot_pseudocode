@@ -15,8 +15,6 @@ define struct person
 define a pointer to person called start
 define a pointer to person called temp_prev
 define a pointer to person called temp_next
-define a character array called state_cat
-define a character array called city_cat
 define integers i, j, city1_sum, city2_sum
 
 copy from NULL to start
@@ -29,7 +27,15 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
     
     while (flat table not empty/null sign)
     {
-        allocate a heap space and store its address into start
+        if start == NULL
+        {
+            allocate a heap space and store its address into start
+        }
+        else
+        {
+            allocate a heap space and store its address into temp_next
+        }
+        
         copy from ith row jth column to name
         copy from ith row (j+1)th column to city
         copy from ith row (j+2)th column to state
@@ -64,7 +70,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
        {
            if city1 != temp_prev->city
            {
-               x++
+               rows++
            }
            temp_prev = temp_prev->link_back
        }
