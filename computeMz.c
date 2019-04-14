@@ -9,14 +9,13 @@
 
 
 #include <stdio.h>
-#include <stdlib.h>
 
 void computeMz(double * MassList, int MassListSize, int * chargeList, int chargeListSize, double * mzListOut, int *mzListOutSize);
 
 int main()
 
 {
-    int MassListSize, chargeListSize, *mzListOutSize, i, j, count, *ptr;
+    int MassListSize, chargeListSize, *mzListOutSize, i, j;
     double MassList[3] = {22783.0, 22807.2, 500505.7};
     int chargeList[5] = {10, 11, 12, 13, 14};
     double mzListOut[1000];
@@ -24,29 +23,24 @@ int main()
     chargeListSize = 5;
     MassListSize = 3;
 
-    /* initializing array & size, so can test if the function worked later */
+    /* initializing array & size, so if sth goes wrong we will notice */
     for (i = 0; i < 1000; i++)
     {
         mzListOut[i] = 0.0;
     }
     mzListOutSize = &i;
- printf("before function%d\n", *mzListOutSize);
+ 
+    computeMz(MassList, MassListSize, chargeList, chargeListSize, mzListOut,mzListOutSize);  
 
-   computeMz(MassList, MassListSize, chargeList, chargeListSize, mzListOut,mzListOutSize);
-printf("back from function%d\n", *mzListOutSize);
+    printf("You should see \t%d results\n", *mzListOutSize);
 
-
-    ptr = mzListOutSize;
-    count = *ptr;
-
-    for (j = 0; j < 15; j++)
+    for (j = 0; j < *mzListOutSize; j++)
     {
-        printf("%f\n", mzListOut[j]);
+        printf("%d\t%f\n", j+1,  mzListOut[j]);
     }
 
     return(0);
 }
-
 
 void computeMz(double * MassList, int MassListSize, int * chargeList, int chargeListSize, double * mzListOut, int *mzListOutSize)
 {
@@ -64,6 +58,4 @@ void computeMz(double * MassList, int MassListSize, int * chargeList, int charge
     }
 
     *mzListOutSize = counter;
-printf("exiting function%d\n", *mzListOutSize);
-
 }
