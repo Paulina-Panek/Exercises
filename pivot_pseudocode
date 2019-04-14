@@ -9,7 +9,7 @@ define struct person
     char state[2]
     char item[15]
     float price
-    struct person*
+    struct person* next
 }
 
 define a pointer to person called start
@@ -31,6 +31,7 @@ void function makePivot (flat_table[][], row_fields, column_fields, data_fields)
         copy from ith row (j+2)th column to state
         copy from ith row (j+3)th column to item
         copy from ith row (j+4)th column to price
+        copy from NULL to next
         i++
     }
     
