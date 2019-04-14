@@ -45,24 +45,32 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
                 columnfield = data
                 datafield[0] = sumCity
                 datafield[1] = sumPrice
+                parameters_num = 4
+                
                 
    copy from start->state to state_cat
    copy from start->city to city_cat
    copy from start->link_back to temp_next
    
+   rows = 0
+   
    while temp_prev->link_back != NULL
    {
-       if temp_next->state == temp_prev->state
+       state1 = temp_prev->state
+       city1 = temp_prev->city
+       rows++
+       temp_prev = temp_prev->link_back
+       if state1 == temp_prev->city
        {
-           if temp_next->city == temp_prev->city
+           if city1 != temp_prev->city
            {
-               city1_sum = city1_sum + (temp_next->price)
+               x++
            }
-           else
-           {
-               temp_prev = temp_next
-               temp_next = temp_prev->link_back
-           }    
+           temp_prev = temp_prev->link_back
+       }
+       else
+       {
            
+       }
            
     
