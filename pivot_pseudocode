@@ -67,7 +67,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
        city1 = temp_prev->city
        rows++
        temp_prev = temp_prev->link_back
-       if state1 == temp_prev->city
+       if state1 == temp_prev->state
        {
            if city1 != temp_prev->city
            {
@@ -77,7 +77,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
        }
        else
        {
-           
+           temp_prev = temp_prev->link_back
        }
            
     
