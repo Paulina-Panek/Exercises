@@ -69,7 +69,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
                 
    copy from start->state to state_cat
    copy from start->city to city_cat
-   copy from start->link_back to temp_next
+   copy from temp_prev->link_back to temp_next
    
    rows = 0
    
