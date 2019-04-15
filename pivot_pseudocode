@@ -84,47 +84,52 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
 
       for (temp_prev != NULL)   /* while linked-list not empty */
       {
-         copy from NULL to one_back
-         copy from 1 to endCheck
-         copy from end->state to pivot[index][0]
-         copy from end->city to pivot[index][1]
-         /* can't sum cities so leaving that out, using string library I could check if string or number and assing NULL if char */
-         copy from temp_prev->price to pivot[index][3]
-         copy from end->link_back to temp_next
-         copy from temp_next to end
-         endCheck = removeFromLL(temp_prev, temp_next, one_back, start, end)
+          copy from NULL to one_back
+          copy from 1 to endCheck
+          copy from end->state to pivot[index][0]
+          copy from end->city to pivot[index][1]
+          /* can't sum cities so leaving that out, using string library I could check if string or number and assing NULL if char */
+          copy from temp_prev->price to pivot[index][3]
+          copy from end->link_back to temp_next
+          copy from temp_next to end
+          endCheck = removeFromLL(temp_prev, temp_next, one_back, start, end)
 
-         while (endCheck == 1)   /* while we didn't hit the end of the flat table */
-         {
-             if sameStateCity(pivot[index][0], pivot[index][1], temp_prev) == 1
-             {
+          while (endCheck == 1)   /* while we didn't hit the end of the flat table */
+          {
+              if sameStateCity(pivot[index][0], pivot[index][1], temp_prev) == 1
+              {
                  pivot[index][3] = pivot[index][3] + temp_prev->price
                  endCheck = removeFromLL(temp_prev, temp_next, one_back, start, end)
-             }
-             else
-             {
+              }
+              else
+              {
                  endCheck = MoveToNextPerson(temp_prev, temp_next, one_back)
-             }
+              }
        
-             ****************************************************
-             * check for more people from same state, diff city *
-             ****************************************************
-             if (endCheck == 0)
-             {
+              ****************************************************
+              * check for more people from same state, diff city *
+              ****************************************************
+              if (endCheck == 0)
+              {
                   moreInState = 0
                   copy from end to temp_prev
+                  if (temp_prev != NULL)
+                  {
+                      copy from temp_prev->link_back to temp_next
+                  }
+                  
                   copy from NULL to one_back
         
                   while (temp_prev != NULL)    /* we didn't go through all the entries again */
                   {
                      if sameState(pivot[index][0], temp_prev) == 1
-                      {
+                     {
                           copy from 1 to moreInState
-                          copy from end->state to pivot[index][1]
-                          copy from end->city to pivot[index][1]
+                          index++
+                          copy from temp_prev->state to pivot[index][1]
+                          copy from temp_prev->city to pivot[index][1]
                           copy from temp_prev->price to pivot[index][3]
                           endCheck = removeFromLL(temp_prev, temp_next, one_back, start, end)
-                          index++
                       }
                       else
                       {
@@ -133,10 +138,11 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
                           {
                               index++
                           }
-                      }      
+                       }      
                     }
-                }
-        }
+                 }
+          }
+      }
     copy from 0.0 to sumPrice
  
     for (q = 0, q < index, q++)
