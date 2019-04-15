@@ -17,11 +17,13 @@ define struct person
 *********************************************
 
 define a pointer to person called start
+define a pointer to person called end
 define a pointer to person called temp_prev
 define a pointer to person called temp_next
 define integers i, j
 
 copy from NULL to start
+copy from NULL to end
 copy from NULL to temp_prev
 copy from NULL to temp_next
 
@@ -50,12 +52,14 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
         copy from temp_next to temp_prev
         i++      /* (i+1) = number of persons = number of rows in flat table */
     }
+    copy from temp_prev to end
     
     ****************************************************
     *   Values after creating the linked-list:         *
     *   start = ptr to person with NULL in link_back   *
     *   temp_prev = ptr to "end person"                *
     *   temp_next = ptr to "end person"                *
+    *   end = ptr to "end person"                      *
     ****************************************************
     
     Assumption: rowfield[0] = state
@@ -70,27 +74,31 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
 
 index = 0
 
-for ((i+1) != 0)
+for (Not empty linked list)
 {
    copy from temp_prev->to pivot[index][0]
    copy from temp_prev->city to pivot[index][1]
    /* can't sum cities so leaving that blank */
    copy from temp_prev->price to pivot[index][3]
    copy from temp_prev->link_back to temp_next
+   copy from temp_next to end
    removeFromLL(temp_prev)
    
-   endCheck = MoveToNextPerson
+   endCheck = MoveToNextPerson(temp_prev, temp_next, end)
  
    while (endCheck)
+   {
         if sameStateCity(pivot[index][0], pivot[index][1], temp_next) == 1
         {
              pivot[0][3] = pivot[0][3] + temp_next->price
-             endCheck = MoveToNextPerson
+             endCheck = removeFromLL(temp_prev)
         }
         else
         {
-            endCheck = MoveToNextPerson
+            endCheck = MoveToNextPerson(temp_prev, temp_next, end)
         }
+    }
+    index++
 }
 
 
