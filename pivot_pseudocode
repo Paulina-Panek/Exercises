@@ -105,21 +105,21 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
              {
                  endCheck = MoveToNextPerson(temp_prev, temp_next, one_back)
              }
-             index++
-        
+       
              ****************************************************
              * check for more people from same state, diff city *
              ****************************************************
              if (endCheck == 0)
              {
                   moreInState = 0
+                  copy from end to temp_prev
+                  copy from NULL to one_back
         
                   while (temp_prev != NULL)    /* we didn't go through all the entries again */
                   {
-                     if sameState(pivot[index-1][0], temp_prev) == 1
+                     if sameState(pivot[index][0], temp_prev) == 1
                       {
                           copy from 1 to moreInState
-                          copy from NULL to one_back
                           copy from end->city to pivot[index][1]
                           copy from temp_prev->price to pivot[index][3]
                           endCheck = removeFromLL(temp_prev, temp_next, one_back, start, end)
@@ -131,6 +131,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
                       }      
                   }
               }
+          index++
         }
     copy from 0.0 to sumPrice
  
