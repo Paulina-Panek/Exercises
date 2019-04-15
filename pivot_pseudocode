@@ -51,6 +51,14 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
         i++
     }
     
+    ****************************************************
+    *   Values after creating the linked-list:         *
+    *   start = ptr to person with NULL in link_back   *
+    *   temp_prev = ptr to "end person"                *
+    *   temp_next = ptr to "end person"                *
+    ****************************************************
+    
+    
     Assumption: rowfield[0] = state
                 rowfield[1] = city
                 columnfield = data
