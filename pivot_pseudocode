@@ -80,8 +80,10 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
            temp_prev = temp_prev->link_back
        }
            
-           
+***********************************************           
  functions:
+ **********************************************
+ 
  int sameStateCity(char [] state, char [] city, struct person * person_ptr)
  {
      int rtrn;
@@ -94,8 +96,21 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
        {
            rtrn = 1
        }
-     }
-     
+     }   
      return(rtrn)
  }
  
+  int MoveToNextPerson(struct person* temp_prev, struct person* temp_next)
+  {
+      int rtrn
+      
+      if (temp_next->link_back == NULL)
+      {
+          rtrn = 0
+      }
+      else
+      {
+          temp_prev = temp_next
+          temp_next = temp_next->link_back
+          rtrn = 1
+      }
