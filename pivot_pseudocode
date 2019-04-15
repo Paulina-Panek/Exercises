@@ -82,6 +82,7 @@ index = 0
 for (temp_prev != NULL)
 {
   one_back = NULL
+  endCheck = 1
   copy from end->state to pivot[index][0]
   copy from end->city to pivot[index][1]
   /* can't sum cities so leaving that blank */
@@ -90,7 +91,7 @@ for (temp_prev != NULL)
   copy from temp_next to end
   endCheck = removeFromLL(temp_prev, one_back)
 
-   while (endCheck)
+   while (endCheck == 1)
    {
         if sameStateCity(pivot[index][0], pivot[index][1], temp_prev) == 1
         {
@@ -104,7 +105,15 @@ for (temp_prev != NULL)
     }
     index++
 }
-
+ 
+ sumPrice = 0
+ 
+ for (q = 0, q < index, q++)
+ {
+     sumPrice = sumPrice + pivot[q][3]
+ }
+ 
+ copy from sumPrice to pivot[q+1][3]
 
 ***********************************************           
 * functions:                                  *
@@ -169,7 +178,8 @@ for (temp_prev != NULL)
         copy from temp_next to temp_prev
         if temp_prev == NULL
         {
-            rtrn == 0
+           copy from NULL to start
+           rtrn == 0
         }
         else
         {
