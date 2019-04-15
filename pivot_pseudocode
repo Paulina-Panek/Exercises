@@ -48,7 +48,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
         copy from flat_table[i][j+4] to temp_next->price
         copy from temp_prev to temp_next->link_back
         copy from temp_next to temp_prev
-        i++
+        i++      /* (i+1) = number of persons */
     }
     
     ****************************************************
@@ -57,7 +57,6 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
     *   temp_prev = ptr to "end person"                *
     *   temp_next = ptr to "end person"                *
     ****************************************************
-    
     
     Assumption: rowfield[0] = state
                 rowfield[1] = city
