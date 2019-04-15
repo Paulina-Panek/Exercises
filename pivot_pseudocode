@@ -131,7 +131,8 @@ for (temp_prev != NULL)
       int rtrn
       
       if (temp_next == NULL)
-      {
+      {   
+          temp_prev = end
           rtrn = 0
       }
       else
