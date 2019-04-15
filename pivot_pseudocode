@@ -84,7 +84,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
         if sameStateCity(state_search, city_search, temp_prev) == 1
         {
              pivot[0][3] = pivot[0][3] + temp_prev->price
-             removeFromLL(temp_prev)
+             endCheck = removeFromLL(temp_prev)
         }
         else
         {
@@ -129,9 +129,20 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
     return(rtrn)
     }
     
-    removeFromLL(temp_prev)
+    int removeFromLL(temp_prev)
+    
+    int rtrn
+    
+    rtrn = 1
+    
     {
         deallocate (temp_prev)
         copy from temp_next to temp_prev
         copy from temp prev->link_back to temp_next
+        if temp_next == NULL
+        {
+            rtrn == 0
+        }
+        
+        return(rtrn)
     }
