@@ -48,7 +48,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
         copy from flat_table[i][j+4] to temp_next->price
         copy from temp_prev to temp_next->link_back
         copy from temp_next to temp_prev
-        i++      /* (i+1) = number of persons */
+        i++      /* (i+1) = number of persons = number of rows in flat table */
     }
     
     ****************************************************
@@ -64,34 +64,34 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
                 datafield[0] = sumCity
                 datafield[1] = sumPrice
                 parameters_num = 4             
-                
-   copy from temp_prev->state to state_search
-   copy from temp_prev->city to city_search
-   copy from temp_prev->link_back to temp_next
    
    allocate pivot[i+2][4] array        /* max size, might not all be used, adds a row for total sum */
    initiate pivot array with null signs
-   
-   copy from state_search to pivot[0][0]
-   copy from city_search to pivot[0][1]
+
+index = 0
+
+for ((i+1) != 0)
+{
+   copy from temp_prev->to pivot[index][0]
+   copy from temp_prev->city to pivot[index][1]
    /* can't sum cities so leaving that blank */
-   copy from temp_prev->price to pivot[0][3]
+   copy from temp_prev->price to pivot[index][3]
+   copy from temp_prev->link_back to temp_next
    removeFromLL(temp_prev)
    
    endCheck = MoveToNextPerson
-
-while 
+ 
    while (endCheck)
-        if sameStateCity(state_search, city_search, temp_prev) == 1
+        if sameStateCity(pivot[index][0], pivot[index][1], temp_next) == 1
         {
-             pivot[0][3] = pivot[0][3] + temp_prev->price
-             endCheck = removeFromLL(temp_prev)
+             pivot[0][3] = pivot[0][3] + temp_next->price
+             endCheck = MoveToNextPerson
         }
         else
         {
             endCheck = MoveToNextPerson
         }
-
+}
 
 
 ***********************************************           
