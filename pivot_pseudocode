@@ -16,22 +16,23 @@ define struct person
 *  Create a linked-list from the flat table *
 *********************************************
 
-define a pointer to person called start
-define a pointer to person called end
-define a pointer to person called temp_prev
-define a pointer to person called temp_next
-define integers i, j
+define pointers to person called start, end, temp_prev, temp_next, one_back
+define integers i, j, index, q, endCheck
+define a float  sumPrice
 
 copy from NULL to start
 copy from NULL to end
 copy from NULL to temp_prev
 copy from NULL to temp_next
 
+********************************************************************************************
+* Function that creates a linked-list out of 2D array and makes a pivot table out of it    *
+********************************************************************************************
 void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2])
 {
     i = 0, j = 0
     
-    while (end of table not reached)      /* null sign or predefined size) */
+    while (end of table not reached)      /* set the condition by null sign/eof sign, or predefined size) */
     {
         if start == NULL
         {
@@ -54,16 +55,18 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
     }
     copy from temp_prev to end
     
-    ****************************************************
-    *   Values after creating the linked-list:         *
-    *   start = ptr to person with NULL in link_back   *
-    *   temp_prev = ptr to "end person"                *
-    *   temp_next = ptr to "end person"                *
-    *   end = ptr to "end person"                      *
-    ****************************************************
+    ********************************************************
+    *   Values after creating the linked-list:             *
+    *   start = ptr to person with NULL in link_back       *
+    *   - not really necessary for this code, but good     *
+    *   to have if further development of the code needed  *
+    *   temp_prev = ptr to "end person"                    *
+    *   temp_next = ptr to "end person"                    *
+    *   end = ptr to "end person"                          *
+    ********************************************************
     
     ***************************************************************************
-    *     Assumptions about pivot config:                                     *
+    *     Assumed pivot config:                                               *
     *          rowfield[0] = state                                            *
     *          rowfield[1] = city                                             *
     *          columnfield = data                                             *
@@ -74,58 +77,63 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
     * so I can refer to temp_prev->state etc                                  *
     ***************************************************************************
    
-   allocate pivot[i+2][parameters_num] array        /* max size, might not all be used, adds a row for total sum */
-   initiate pivot array with null signs
+      allocate pivot[i+2][parameters_num] array        /* max possible size, might not all be used, adds a row for total sum */
+      initiate pivot array with null signs
 
-index = 0
+      index = 0
 
-for (temp_prev != NULL)
-{
-  one_back = NULL
-  endCheck = 1
-  copy from end->state to pivot[index][0]
-  copy from end->city to pivot[index][1]
-  /* can't sum cities so leaving that blank */
-  copy from temp_prev->price to pivot[index][3]
-  copy from end->link_back to temp_next
-  copy from temp_next to end
-  endCheck = removeFromLL(temp_prev, one_back)
+      for (temp_prev != NULL)   /* while linked-list not empty */
+      {
+         copy from NULL to one_back
+         copy from 1 to endCheck
+         copy from end->state to pivot[index][0]
+         copy from end->city to pivot[index][1]
+         /* can't sum cities so leaving that out, using string library I could check if string or number and assing NULL if char */
+         copy from temp_prev->price to pivot[index][3]
+         copy from end->link_back to temp_next
+         copy from temp_next to end
+         endCheck = removeFromLL(temp_prev, one_back)
 
-   while (endCheck == 1)
-   {
-        if sameStateCity(pivot[index][0], pivot[index][1], temp_prev) == 1
-        {
-             pivot[0][3] = pivot[0][3] + temp_prev->price
-             endCheck = removeFromLL(temp_prev, one_back)
+         while (endCheck == 1)   /* while we didn't hit the end of the flat table */
+         {
+             if sameStateCity(pivot[index][0], pivot[index][1], temp_prev) == 1
+             {
+                 pivot[0][3] = pivot[0][3] + temp_prev->price
+                 endCheck = removeFromLL(temp_prev, one_back)
+             }
+             else
+             {
+                 endCheck = MoveToNextPerson(temp_prev, temp_next, one_back)
+             }
         }
-        else
-        {
-            endCheck = MoveToNextPerson(temp_prev, temp_next, one_back)
-        }
+        index++
+     }
+ 
+    copy from 0.0 to sumPrice
+ 
+    for (q = 0, q < index, q++)
+    {
+         sumPrice = sumPrice + pivot[q][3]
     }
-    index++
+    copy from sumPrice to pivot[q+1][3]   /* last row of the pivot is sum */
 }
- 
- sumPrice = 0
- 
- for (q = 0, q < index, q++)
- {
-     sumPrice = sumPrice + pivot[q][3]
- }
- 
- copy from sumPrice to pivot[q+1][3]
 
 ***********************************************           
-* functions:                                  *
+*                 FUNCTIONS:                  *
 ***********************************************
  
+ ********************************************************************************************
+* Function that checks if the searched person matches the searched city/state criterion     *
+* Could be used with other configurations adjusted to whether comparing strings or numbers  *
+* Return 1: same as query    Return 0: does not match query                                 *
+*********************************************************************************************
  int sameStateCity(char [] state, char [] city, struct person * person_ptr)
  {
-     int rtrn;
+     int rtrn
      
      rtrn = 0
      
-     if (state == person_pointer->state)     // use string library to compare //
+     if (state == person_pointer->state)     /* use function from string library to do this comparison */
      {
        if city == person_pointer->city
        {
@@ -135,6 +143,11 @@ for (temp_prev != NULL)
      return(rtrn)
  }
  
+ 
+********************************************************************************************
+* Function that moves to next person struct without deleting the previous one              *
+* Return 1: success    Return 0: no more person structs left                               *
+********************************************************************************************
   int MoveToNextPerson(struct person* temp_prev, struct person* temp_next, one_back)
   {
       int rtrn
@@ -151,17 +164,22 @@ for (temp_prev != NULL)
           
           if temp_next == NULL
           {
-            rtrn = 0 +
+            rtrn = 0
           }
            else
            {
-               temp_next = temp_next->link_back
+               copy from temp_next->link_back to temp_next
                rtrn = 1
            }
       }
     return(rtrn)
     }
     
+    
+************************************************************************************************
+* Function that deallocates person, removes dangling pointers and moves to next person struct  *
+* Return 1: success    Return 0: success and no more persons in linked list                    *
+************************************************************************************************
     int removeFromLL(temp_prev, one_back)
     
     int rtrn
@@ -179,7 +197,7 @@ for (temp_prev != NULL)
         if temp_prev == NULL
         {
            copy from NULL to start
-           rtrn == 0
+           rtrn = 0
         }
         else
         {
