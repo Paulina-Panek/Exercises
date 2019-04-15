@@ -65,8 +65,8 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
                 datafield[1] = sumPrice
                 parameters_num = 4             
                 
-   copy from start->state to state_search
-   copy from start->city to city_search
+   copy from temp_prev->state to state_search
+   copy from temp_prev->city to city_search
    copy from temp_prev->link_back to temp_next
    
    allocate pivot[i+2][4] array        /* max size, might not all be used, adds a row for total sum */
@@ -74,8 +74,9 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
    
    copy from state_search to pivot[0][0]
    copy from city_search to pivot[0][1]
-   /* can't add cities so leaving that blank */
-   copy from start->price to pivot[0][3]
+   /* can't sum cities so leaving that blank */
+   copy from temp_prev->price to pivot[0][3]
+   removeFromLL(temp_prev)
    
    endCheck = MoveToNextPerson
    
@@ -130,5 +131,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
     
     removeFromLL(temp_prev)
     {
-    FINISH
+        deallocate (temp_prev)
+        copy from temp_next to temp_prev
+        copy from temp prev->link_back to temp_next
     }
