@@ -92,14 +92,14 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
          copy from temp_prev->price to pivot[index][3]
          copy from end->link_back to temp_next
          copy from temp_next to end
-         endCheck = removeFromLL(temp_prev, one_back)
+         endCheck = removeFromLL(temp_prev, temp_next, one_back, start, end)
 
          while (endCheck == 1)   /* while we didn't hit the end of the flat table */
          {
              if sameStateCity(pivot[index][0], pivot[index][1], temp_prev) == 1
              {
                  pivot[0][3] = pivot[0][3] + temp_prev->price
-                 endCheck = removeFromLL(temp_prev, one_back)
+                 endCheck = removeFromLL(temp_prev, temp_next, one_back, start, end)
              }
              else
              {
@@ -148,7 +148,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
 * Function that moves to next person struct without deleting the previous one              *
 * Return 1: success    Return 0: no more person structs left                               *
 ********************************************************************************************
-  int MoveToNextPerson(struct person* temp_prev, struct person* temp_next, one_back)
+  int MoveToNextPerson(struct person* temp_prev, struct person* temp_next, struct person* one_back)
   {
       int rtrn
       
@@ -180,7 +180,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
 * Function that deallocates person, removes dangling pointers and moves to next person struct  *
 * Return 1: success    Return 0: success and no more persons in linked list                    *
 ************************************************************************************************
-    int removeFromLL(temp_prev, one_back)
+    int removeFromLL(struct person* temp_prev, struct person* temp_next, struct person* one_back, struct person* start, struct person* end)
     
     int rtrn
     
