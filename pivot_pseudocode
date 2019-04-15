@@ -107,6 +107,13 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
              }
         }
         index++
+        
+        **************************************************
+        * check for more people from same state          *
+        **************************************************
+        
+        
+
      }
  
     copy from 0.0 to sumPrice
@@ -143,6 +150,23 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
      return(rtrn)
  }
  
+  ********************************************************************************************
+* Function that checks if the searched person matches the searched state criterion           *
+* Could be used with other configurations adjusted to whether comparing strings or numbers   *
+* Return 1: same as query    Return 0: does not match query                                  *
+**********************************************************************************************
+ int sameState(char [] state, char [] city, struct person * person_ptr)
+ {
+     int rtrn
+     
+     rtrn = 0
+     
+     if (state == person_pointer->state)     /* use function from string library to do this comparison */
+     {
+       rtrn = 1
+     }   
+     return(rtrn)
+ }
  
 ********************************************************************************************
 * Function that moves to next person struct without deleting the previous one              *
