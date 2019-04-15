@@ -78,17 +78,18 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
    initiate pivot array with null signs
 
 index = 0
-one_back = NULL
 
 for (temp_prev != NULL)
 {
-   copy from temp_prev->state to pivot[index][0]
-   copy from temp_prev->city to pivot[index][1]
-   /* can't sum cities so leaving that blank */
-   copy from temp_prev->price to pivot[index][3]
-   copy from temp_prev->link_back to temp_next
-   copy from temp_next to end
-   endCheck = removeFromLL(temp_prev, one_back)
+  one_back = NULL
+  copy from end->state to pivot[index][0]
+  copy from end->city to pivot[index][1]
+  /* can't sum cities so leaving that blank */
+  copy from temp_prev->price to pivot[index][3]
+  copy from end->link_back to temp_next
+  endCheck = removeFromLL(temp_prev, one_back)
+  copy from temp_next to end
+
  
    while (endCheck)
    {
