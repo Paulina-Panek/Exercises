@@ -78,6 +78,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
    initiate pivot array with null signs
 
 index = 0
+one_back = NULL
 
 for (temp_prev != NULL)
 {
@@ -87,14 +88,14 @@ for (temp_prev != NULL)
    copy from temp_prev->price to pivot[index][3]
    copy from temp_prev->link_back to temp_next
    copy from temp_next to end
-   endCheck = removeFromLL(temp_prev)
+   endCheck = removeFromLL(temp_prev, one_back)
  
    while (endCheck)
    {
         if sameStateCity(pivot[index][0], pivot[index][1], temp_prev) == 1
         {
              pivot[0][3] = pivot[0][3] + temp_prev->price
-             endCheck = removeFromLL(temp_prev)
+             endCheck = removeFromLL(temp_prev, one_back)
         }
         else
         {
@@ -125,7 +126,7 @@ for (temp_prev != NULL)
      return(rtrn)
  }
  
-  int MoveToNextPerson(struct person* temp_prev, struct person* temp_next)
+  int MoveToNextPerson(struct person* temp_prev, struct person* temp_next, one_back)
   {
       int rtrn
       
@@ -135,21 +136,23 @@ for (temp_prev != NULL)
       }
       else
       {
+          one_back = temp_prev
           temp_prev = temp_next
+          
           if temp_next == NULL
           {
             rtrn = 0 
           }
            else
            {
-           temp_next = temp_next->link_back
-           rtrn = 1
+               temp_next = temp_next->link_back
+               rtrn = 1
            }
       }
     return(rtrn)
     }
     
-    int removeFromLL(temp_prev)
+    int removeFromLL(temp_prev, one_back)
     
     int rtrn
     
@@ -157,6 +160,7 @@ for (temp_prev != NULL)
     
     {
         deallocate (temp_prev)
+        copy from temp_next to one_back->link_back
         copy from temp_next to temp_prev
         if temp_prev == NULL
         {
