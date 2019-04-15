@@ -87,10 +87,9 @@ for (temp_prev != NULL)
   /* can't sum cities so leaving that blank */
   copy from temp_prev->price to pivot[index][3]
   copy from end->link_back to temp_next
-  endCheck = removeFromLL(temp_prev, one_back)
   copy from temp_next to end
+  endCheck = removeFromLL(temp_prev, one_back)
 
- 
    while (endCheck)
    {
         if sameStateCity(pivot[index][0], pivot[index][1], temp_prev) == 1
@@ -142,7 +141,7 @@ for (temp_prev != NULL)
           
           if temp_next == NULL
           {
-            rtrn = 0 
+            rtrn = 0 +
           }
            else
            {
@@ -161,7 +160,11 @@ for (temp_prev != NULL)
     
     {
         deallocate (temp_prev)
-        copy from temp_next to one_back->link_back
+        if one_back != NULL
+        {
+               copy from temp_next to one_back->link_back  
+        }
+
         copy from temp_next to temp_prev
         if temp_prev == NULL
         {
@@ -169,7 +172,7 @@ for (temp_prev != NULL)
         }
         else
         {
-        copy from temp_prev->link_back to temp_next
+            copy from temp_prev->link_back to temp_next
         }
         
         return(rtrn)
