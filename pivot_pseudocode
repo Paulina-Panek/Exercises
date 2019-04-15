@@ -12,6 +12,10 @@ define struct person
     struct person* link_back
 }
 
+*********************************************
+*  Create a linked-list from the flat table *
+*********************************************
+
 define a pointer to person called start
 define a pointer to person called temp_prev
 define a pointer to person called temp_next
@@ -81,8 +85,8 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
        }
            
 ***********************************************           
- functions:
- **********************************************
+* functions:                                  *
+***********************************************
  
  int sameStateCity(char [] state, char [] city, struct person * person_ptr)
  {
@@ -114,3 +118,6 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
           temp_next = temp_next->link_back
           rtrn = 1
       }
+
+    return(rtrn)
+    }
