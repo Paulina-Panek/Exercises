@@ -17,7 +17,7 @@ define struct person
 *********************************************
 
 define pointers to person called start, end, temp_prev, temp_next, one_back
-define integers i, j, index, q, endCheck, moreInState
+define integers i, j, index, q, endCheck, moreInState, check2
 define a float  sumPrice
 
 copy from NULL to start
