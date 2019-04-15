@@ -79,7 +79,8 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
    removeFromLL(temp_prev)
    
    endCheck = MoveToNextPerson
-   
+
+while 
    while (endCheck)
         if sameStateCity(state_search, city_search, temp_prev) == 1
         {
@@ -90,7 +91,9 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
         {
             endCheck = MoveToNextPerson
         }
-           
+
+
+
 ***********************************************           
 * functions:                                  *
 ***********************************************
