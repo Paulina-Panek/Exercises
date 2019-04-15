@@ -62,22 +62,24 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
     *   end = ptr to "end person"                      *
     ****************************************************
     
-    ****************************************************
-    *     Assumptions about pivot config:              *
-    *          rowfield[0] = state                     *
-    *          rowfield[1] = city                      *
-    *          columnfield = data                      *
-    *          datafield[0] = sumCity                  *
-    *          datafield[1] = sumPrice                 *
-    *          parameters_num = 4                      *
-    ****************************************************
+    ***************************************************************************
+    *     Assumptions about pivot config:                                     *
+    *          rowfield[0] = state                                            *
+    *          rowfield[1] = city                                             *
+    *          columnfield = data                                             *
+    *          datafield[0] = sumCity                                         *
+    *          datafield[1] = sumPrice                                        *
+    *          parameters_num = 4    (num needed columns in pivot)            *
+    * Code that translate the config choice into variables needed             *
+    * so I can refer to temp_prev->state etc                                  *
+    ***************************************************************************
    
-   allocate pivot[i+2][4] array        /* max size, might not all be used, adds a row for total sum */
+   allocate pivot[i+2][parameters_num] array        /* max size, might not all be used, adds a row for total sum */
    initiate pivot array with null signs
 
 index = 0
 
-for (Not empty linked list)
+for (temp_prev != NULL)
 {
    copy from temp_prev->state to pivot[index][0]
    copy from temp_prev->city to pivot[index][1]
