@@ -99,7 +99,7 @@ for (temp_prev != NULL)
         }
         else
         {
-            endCheck = MoveToNextPerson(temp_prev, temp_next)
+            endCheck = MoveToNextPerson(temp_prev, temp_next, one_back)
         }
     }
     index++
@@ -168,7 +168,7 @@ for (temp_prev != NULL)
         }
         else
         {
-        copy from temp prev->link_back to temp_next
+        copy from temp_prev->link_back to temp_next
         }
         
         return(rtrn)
