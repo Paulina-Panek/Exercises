@@ -105,33 +105,33 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
              {
                  endCheck = MoveToNextPerson(temp_prev, temp_next, one_back)
              }
-        index++
+             index++
         
-        ****************************************************
-        * check for more people from same state, diff city *
-        ****************************************************
-        if (endCheck == 0)
-        {
-             moreInState = 0
-        
-             while (we didn't go through all the entries again)
+             ****************************************************
+             * check for more people from same state, diff city *
+             ****************************************************
+             if (endCheck == 0)
              {
-                if sameState(pivot[index-1][0], temp_prev) == 1
-                {
-                     copy from 1 to moreInState
-                     copy from end->city to pivot[index][1]
-                     copy from temp_prev->price to pivot[index][3]
-                     pivot[index][3] = pivot[index][3] + temp_prev->price
-                     endCheck = removeFromLL(temp_prev, temp_next, one_back, start, end)
-                     index++
+                  moreInState = 0
+        
+                  while (temp_prev != NULL)    /* we didn't go through all the entries again */
+                  {
+                     if sameState(pivot[index-1][0], temp_prev) == 1
+                      {
+                          copy from 1 to moreInState
+                          copy from NULL to one_back
+                          copy from end->city to pivot[index][1]
+                          copy from temp_prev->price to pivot[index][3]
+                          endCheck = removeFromLL(temp_prev, temp_next, one_back, start, end)
+                          index++
+                      }
+                      else
+                      {
+                          endCheck = MoveToNextPerson(temp_prev, temp_next, one_back)
+                      }      
                   }
-             else
-             {
-                 endCheck = MoveToNextPerson(temp_prev, temp_next, one_back)
-             }      
-         }
-     }
- 
+              }
+        }
     copy from 0.0 to sumPrice
  
     for (q = 0, q < index, q++)
