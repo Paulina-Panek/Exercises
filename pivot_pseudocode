@@ -76,21 +76,19 @@ index = 0
 
 for (Not empty linked list)
 {
-   copy from temp_prev->to pivot[index][0]
+   copy from temp_prev->state to pivot[index][0]
    copy from temp_prev->city to pivot[index][1]
    /* can't sum cities so leaving that blank */
    copy from temp_prev->price to pivot[index][3]
    copy from temp_prev->link_back to temp_next
    copy from temp_next to end
-   removeFromLL(temp_prev)
-   
-   endCheck = MoveToNextPerson(temp_prev, temp_next, end)
+   endCheck = removeFromLL(temp_prev)
  
    while (endCheck)
    {
-        if sameStateCity(pivot[index][0], pivot[index][1], temp_next) == 1
+        if sameStateCity(pivot[index][0], pivot[index][1], temp_prev) == 1
         {
-             pivot[0][3] = pivot[0][3] + temp_next->price
+             pivot[0][3] = pivot[0][3] + temp_prev->price
              endCheck = removeFromLL(temp_prev)
         }
         else
@@ -150,7 +148,7 @@ for (Not empty linked list)
         deallocate (temp_prev)
         copy from temp_next to temp_prev
         copy from temp prev->link_back to temp_next
-        if temp_next == NULL
+        if temp_prev == NULL
         {
             rtrn == 0
         }
