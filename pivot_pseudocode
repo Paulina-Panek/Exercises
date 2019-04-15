@@ -98,7 +98,7 @@ for (temp_prev != NULL)
         }
         else
         {
-            endCheck = MoveToNextPerson(temp_prev, temp_next, end)
+            endCheck = MoveToNextPerson(temp_prev, temp_next)
         }
     }
     index++
@@ -129,17 +129,23 @@ for (temp_prev != NULL)
   {
       int rtrn
       
-      if (temp_next->link_back == NULL)
+      if (temp_next == NULL)
       {
           rtrn = 0
       }
       else
       {
           temp_prev = temp_next
-          temp_next = temp_next->link_back
-          rtrn = 1
+          if temp_next == NULL
+          {
+            rtrn = 0 
+          }
+           else
+           {
+           temp_next = temp_next->link_back
+           rtrn = 1
+           }
       }
-
     return(rtrn)
     }
     
@@ -152,10 +158,13 @@ for (temp_prev != NULL)
     {
         deallocate (temp_prev)
         copy from temp_next to temp_prev
-        copy from temp prev->link_back to temp_next
         if temp_prev == NULL
         {
             rtrn == 0
+        }
+        else
+        {
+        copy from temp prev->link_back to temp_next
         }
         
         return(rtrn)
