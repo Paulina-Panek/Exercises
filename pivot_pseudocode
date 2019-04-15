@@ -1,6 +1,6 @@
 Paulina Panek  4/14/2019
 
-Assumption: flat table doesn't have header row, columns follow the same order as in the struct
+Assumption: flat table doesn't have header a row/column, columns follow the same order as in the struct, last entry followed by a null sign
 
 define struct person
 {
@@ -29,7 +29,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
 {
     i = 0, j = 0
     
-    while (flat table not empty/null sign)
+    while (end of table not reached)      /* null sign or predefined size) */
     {
         if start == NULL
         {
@@ -41,11 +41,11 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
             allocate a heap space and store its address into temp_next
         }
         
-        copy from ith row jth column to temp_next->name
-        copy from ith row (j+1)th column to temp_next->city
-        copy from ith row (j+2)th column to temp_next->state
-        copy from ith row (j+3)th column to temp_next->item
-        copy from ith row (j+4)th column to temp_next->price
+        copy from flat_table[i][j] to temp_next->name
+        copy from flat_table[i][j+1] to temp_next->city
+        copy from flat_table[i][j+2] to temp_next->state
+        copy from flat_table[i][j+3] to temp_next->item
+        copy from flat_table[i][j+4] to temp_next->price
         copy from temp_prev to temp_next->link_back
         copy from temp_next to temp_prev
         i++
