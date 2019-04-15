@@ -17,7 +17,7 @@ define struct person
 *********************************************
 
 define pointers to person called start, end, temp_prev, temp_next, one_back
-define integers i, j, index, q, endCheck
+define integers i, j, index, q, endCheck, moreInState
 define a float  sumPrice
 
 copy from NULL to start
@@ -78,7 +78,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
     ***************************************************************************
    
       allocate pivot[i+2][parameters_num] array        /* max possible size, might not all be used, adds a row for total sum */
-      initiate pivot array with null signs
+      initiate pivot array with null signs for char columns, 0 for int/float
 
       index = 0
 
@@ -98,22 +98,38 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
          {
              if sameStateCity(pivot[index][0], pivot[index][1], temp_prev) == 1
              {
-                 pivot[0][3] = pivot[0][3] + temp_prev->price
+                 pivot[index][3] = pivot[index][3] + temp_prev->price
                  endCheck = removeFromLL(temp_prev, temp_next, one_back, start, end)
              }
              else
              {
                  endCheck = MoveToNextPerson(temp_prev, temp_next, one_back)
              }
-        }
         index++
         
-        **************************************************
-        * check for more people from same state          *
-        **************************************************
+        ****************************************************
+        * check for more people from same state, diff city *
+        ****************************************************
+        if (endCheck == 0)
+        {
+             moreInState = 0
         
-        
-
+             while (we didn't go through all the entries again)
+             {
+                if sameState(pivot[index-1][0], temp_prev) == 1
+                {
+                     copy from 1 to moreInState
+                     copy from end->city to pivot[index][1]
+                     copy from temp_prev->price to pivot[index][3]
+                     pivot[index][3] = pivot[index][3] + temp_prev->price
+                     endCheck = removeFromLL(temp_prev, temp_next, one_back, start, end)
+                     index++
+                  }
+             else
+             {
+                 endCheck = MoveToNextPerson(temp_prev, temp_next, one_back)
+             }      
+         }
      }
  
     copy from 0.0 to sumPrice
@@ -155,7 +171,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
 * Could be used with other configurations adjusted to whether comparing strings or numbers   *
 * Return 1: same as query    Return 0: does not match query                                  *
 **********************************************************************************************
- int sameState(char [] state, char [] city, struct person * person_ptr)
+ int sameState(char [] state, struct person * person_ptr)
  {
      int rtrn
      
