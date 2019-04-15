@@ -238,6 +238,11 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
     rtrn = 1
     
     {
+        if (temp_prev == end)
+        {
+             copy from temp_next to end
+        }
+        
         deallocate (temp_prev)
         if one_back != NULL
         {
