@@ -121,7 +121,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
                   
                   copy from NULL to one_back
         
-                  while ((temp_prev != NULL || check2 != 0) && moreInState == 0)    /* we didn't go through all the entries again */
+                  while ((temp_prev != NULL && check2 != 0) && moreInState == 0)    /* we didn't go through all the entries again */
                   {
                      if sameState(pivot[index][0], temp_prev) == 1
                      {
