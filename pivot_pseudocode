@@ -197,6 +197,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
         if temp_prev == NULL
         {
            copy from NULL to start
+           copy from NULL to end
            rtrn = 0
         }
         else
