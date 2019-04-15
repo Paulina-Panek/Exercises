@@ -19,7 +19,7 @@ define struct person
 define a pointer to person called start
 define a pointer to person called temp_prev
 define a pointer to person called temp_next
-define integers i, j, city1_sum, city2_sum
+define integers i, j
 
 copy from NULL to start
 copy from NULL to temp_prev
@@ -63,33 +63,15 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
                 columnfield = data
                 datafield[0] = sumCity
                 datafield[1] = sumPrice
-                parameters_num = 4
+                parameters_num = 4             
                 
-                
-   copy from start->state to state_cat
-   copy from start->city to city_cat
+   copy from start->state to state_search
+   copy from start->city to city_search
    copy from temp_prev->link_back to temp_next
    
-   rows = 0
+   allocate [i+2][4] array        /* max size, might not all be used, adds a row for total sum */
    
-   while temp_next->link_back != NULL
-   {
-       state1 = temp_prev->state
-       city1 = temp_prev->city
-       rows++
-       temp_prev = temp_prev->link_back
-       if state1 == temp_prev->state
-       {
-           if city1 != temp_prev->city
-           {
-               rows++
-           }
-           temp_prev = temp_prev->link_back
-       }
-       else
-       {
-           temp_prev = temp_prev->link_back
-       }
+   sameStateCity(state_search, city_search, temp_prev)
            
 ***********************************************           
 * functions:                                  *
