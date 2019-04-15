@@ -62,12 +62,15 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
     *   end = ptr to "end person"                      *
     ****************************************************
     
-    Assumption: rowfield[0] = state
-                rowfield[1] = city
-                columnfield = data
-                datafield[0] = sumCity
-                datafield[1] = sumPrice
-                parameters_num = 4             
+    ****************************************************
+    *     Assumptions about pivot config:              *
+    *          rowfield[0] = state                     *
+    *          rowfield[1] = city                      *
+    *          columnfield = data                      *
+    *          datafield[0] = sumCity                  *
+    *          datafield[1] = sumPrice                 *
+    *          parameters_num = 4                      *
+    ****************************************************
    
    allocate pivot[i+2][4] array        /* max size, might not all be used, adds a row for total sum */
    initiate pivot array with null signs
