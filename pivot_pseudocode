@@ -83,7 +83,8 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
       index = 0
 
       for (temp_prev != NULL)   /* while linked-list not empty */
-      {
+      {   
+          check2 = 1
           copy from NULL to one_back
           copy from 1 to endCheck
           copy from end->state to pivot[index][0]
@@ -120,16 +121,21 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
                   
                   copy from NULL to one_back
         
-                  while (temp_prev != NULL)    /* we didn't go through all the entries again */
+                  while (temp_prev != NULL || check2 != 0 )    /* we didn't go through all the entries again */
                   {
                      if sameState(pivot[index][0], temp_prev) == 1
                      {
                           copy from 1 to moreInState
                           index++
-                          copy from temp_prev->state to pivot[index][1]
+                          copy from temp_prev->state to pivot[index][0]
                           copy from temp_prev->city to pivot[index][1]
                           copy from temp_prev->price to pivot[index][3]
                           endCheck = removeFromLL(temp_prev, temp_next, one_back, start, end)
+                          if endCheck == 0
+                          {
+                              index++
+                              check2 = 0
+                          }
                       }
                       else
                       {
@@ -137,6 +143,7 @@ void function makePivot (flat_table[][], rowfield[2], columnfield[], datafield[2
                           if endCheck == 0
                           {
                               index++
+                              check2 = 0
                           }
                        }      
                     }
